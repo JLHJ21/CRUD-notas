@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import AuthUser from '../components/auth/AuthUser'
 import axios from 'axios'
-
+import userIcon from '../components/images/pardo.png'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +10,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 const endpoint = 'http://localhost:8000/api/v1'
 
 function NavBar() {
+
 
     const { getLogout, getToken } = AuthUser()
     const iconNotes = <FontAwesomeIcon icon={faEnvelope} className='align-self-center pe-1' size='xl' />
@@ -56,7 +57,7 @@ function NavBar() {
 
                         <div className="dropdown text-end">
                             <Link className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://images.unsplash.com/photo-1531040630173-7cfb894c8eaa?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" alt="mdo" width="32" height="32" className="rounded-circle" />
+                                <img src={userIcon} alt="mdo" width="32" height="32" className="rounded-circle" />
                             </Link>
                             <ul className="dropdown-menu text-small">
                                 <li>

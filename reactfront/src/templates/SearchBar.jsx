@@ -25,8 +25,6 @@ const SearchBar = ({ typeSearch, variableUpdate, amountPages, variablePagination
 
   const searchData = async () => {
 
-
-    console.log(actualPage)
     await axios.post(`${urlApi}`,
       {
         option_select: optionSelect,
@@ -45,6 +43,20 @@ const SearchBar = ({ typeSearch, variableUpdate, amountPages, variablePagination
         response => {
           //console.log(response.data.notes)
           variableUpdate(response.data.notes)
+          variablePagination(response.data.page)
+
+
+          response.data.page.forEach((page) => {
+            if (page.selected === true) {
+              actualPage = page.page
+
+              amountPages[actualPage] === 'undefined' ? <div>Loading</div> :
+
+                setNumberPreviousPage(actualPage - 1 <= 0 ? { 'number': 1, 'canUse': 'disabled' } : { 'number': actualPage - 1, 'canUse': '' })
+              setNumberNextPage(typeof (amountPages[actualPage]) === 'undefined' || actualPage === 1 ? { 'number': 'no tiene', 'canUse': 'disabled' } : { 'number': actualPage + 1, 'canUse': '' })
+            }
+          });
+
         }
       ).catch(
         error => {
@@ -107,7 +119,7 @@ const SearchBar = ({ typeSearch, variableUpdate, amountPages, variablePagination
                   amountPages[actualPage] === 'undefined' ? <div>Loading</div> :
 
                     setNumberPreviousPage(actualPage - 1 <= 0 ? { 'number': 1, 'canUse': 'disabled' } : { 'number': actualPage - 1, 'canUse': '' })
-                  setNumberNextPage(typeof (amountPages[actualPage]) === 'undefined' ? { 'number': 'no tiene', 'canUse': 'disabled' } : { 'number': actualPage + 1, 'canUse': '' })
+                  setNumberNextPage(typeof (amountPages[actualPage]) === 'undefined' || actualPage === 1 ? { 'number': 'no tiene', 'canUse': 'disabled' } : { 'number': actualPage + 1, 'canUse': '' })
                 }
               });
 
