@@ -426,15 +426,23 @@ class notesController extends Controller
             $data = [
                 'message' => 'No se encontraron notas',
                 'error' => '200',
+                'page' => [['page' => 1, 'selected' => true]]
             ];
             return response()->json(data: $data, status: 200);
         }
 
 
-        ////////////7
+        /////////////
+
         $notesPage = NotesData::from('notes_data')
-            ->select(['id_note_data'])
+            ->select(['id_note_data', 'id_note'])
+            ->with('notes:id_note,description_note,date_note')
+
+            //colocar columnas a retirar, o escribir sentencia SQL
             ->where('id_state', '=', 1)
+            ->whereHas('notes',  function ($query) use ($option_select, $dataSearch) {
+                $query->where($option_select, 'LIKE', $dataSearch);
+            })
             ->count();
 
         //////////////////////////
