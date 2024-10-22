@@ -1,0 +1,12 @@
+Página de notas
+- Registrar cuenta
+- Iniciar sesion
+- Ver notas
+- Crear notas
+- Modificar notas
+- Cerrar sesión
+
+- 2 tipos de usuarios
+	- Usuario
+	- Administrador
+- Página para ver todos los usuarios (administrador solamente)
